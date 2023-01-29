@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KitchenDB_EFCore
 {
-    public class Recipes
+    public class Recipe
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
@@ -19,7 +19,7 @@ namespace KitchenDB_EFCore
         public string? TextRecipe { get; set; }
         public string TypeRecipeTimesOfDay { get; set; } = null!; //первое втрое или десерт или другое 
         
-        public List<Products> Products { get; set; } = new();
+        public List<Product> Products { get; set; } = new();
 
     }
     

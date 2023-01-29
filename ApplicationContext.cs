@@ -10,8 +10,8 @@ namespace KitchenDB_EFCore
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<Products> Products { get; set; } = null!;
-        public DbSet<Recipes> Recipes { get; set; } = null!;
+        public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<Recipe> Recipes { get; set; } = null!;
         public ApplicationContext()
         {
             Database.EnsureDeleted();   // удаляем бд со старой схемой

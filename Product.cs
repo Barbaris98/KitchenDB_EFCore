@@ -7,7 +7,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace KitchenDB_EFCore
 {
-    public class Products
+    public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
@@ -15,8 +15,8 @@ namespace KitchenDB_EFCore
         public int? Price { get; set; }
         public string? Note { get; set; }
 
-        public int RecipesId { get; set; }
-        public Recipes? Recipes { get; set; }
+        public int RecipeId { get; set; }
+        public Recipe? Recipe { get; set; }
 
     }
 
