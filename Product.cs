@@ -11,12 +11,11 @@ namespace KitchenDB_EFCore
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public int Amount { get; set; }
-        public int? Price { get; set; }
+        public int? AmountInGramm { get; set; }// gramm
+        public int? AmountInPieces { get; set; }// в штуках
         public string? Note { get; set; }
 
-        public int RecipeId { get; set; }
-        public Recipe? Recipe { get; set; }
+        public List<Recipe> Recipes { get; set; } = new();
 
     }
 
