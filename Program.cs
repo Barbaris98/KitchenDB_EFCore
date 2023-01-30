@@ -22,23 +22,7 @@ namespace KitchenDB_EFCore
 
             using (ApplicationContext db = new ApplicationContext())
             {
-                // пересоздадим базу данных
-                //db.Database.EnsureDeleted();
-                //db.Database.EnsureCreated();
-
-                /*
-                // создание и добавление моделей
-                Company microsoft = new Company { Name = "Microsoft" };
-                Company google = new Company { Name = "Google" };
-                db.Companies.AddRange(microsoft, google);
-
-                User tom = new User { Name = "Tom", Company = microsoft };
-                User bob = new User { Name = "Bob", Company = microsoft };
-                User alice = new User { Name = "Alice", Company = google };
-                db.Users.AddRange(tom, bob, alice);
-                db.SaveChanges();
-                */
-
+                
                 Product grechka = new Product
                 {
                     Name = "Гречка",
@@ -65,18 +49,17 @@ namespace KitchenDB_EFCore
                 Product tomatPasta = new Product
                 {
                     Name = "Паста томатная",
-                    AmountInPieces = 20,
+                    AmountInPieces = 2,
                     Note = "100 гр в банке"
+                };
+                Product sosiski = new Product
+                {
+                    Name = "Сосиски",
+                    AmountInPieces = 10
                 };
 
 
-
-
-
-
-
-                db.Products.AddRange(grechka);
-
+                db.Products.AddRange(grechka, svinina, luk, morkov, tomatPasta, sosiski);
 
                 Recipe r1 = new Recipe
                 {
@@ -87,7 +70,7 @@ namespace KitchenDB_EFCore
                     ProteinsEnergyValue = 8,
                     СarbohydratesEnergyValue = 9,
                     FatsEnergyValue = 12,
-                    Products = {grechka,  }
+                    Products = { grechka, svinina, luk, morkov, tomatPasta }
                 };
                 Recipe r2 = new Recipe
                 {
@@ -97,16 +80,11 @@ namespace KitchenDB_EFCore
                     TotalEnergyValue = 175,
                     ProteinsEnergyValue = 6,
                     СarbohydratesEnergyValue = 11,
-                    FatsEnergyValue = 15
+                    FatsEnergyValue = 15,
+                    Products = { grechka, sosiski }
                 };
 
-
-
-
-
-
-
-
+                db.Recipes.AddRange(r1, r2);
 
                 db.SaveChanges();
             }
