@@ -10,7 +10,7 @@ namespace KitchenDB_EFCore
     public class Recipe
     {
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string NameRecipe { get; set; } = null!;
         public string? Сookingtime { get; set; }
 
         public string TypeRecipeTimesOfDay { get; set; } = null!; //первое втрое или десерт или другое

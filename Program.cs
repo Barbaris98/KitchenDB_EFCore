@@ -25,36 +25,36 @@ namespace KitchenDB_EFCore
                 
                 Product grechka = new Product
                 {
-                    Name = "Гречка",
+                    NameProduct = "Гречка",
                     AmountInGramm = 2000,
                     Note = "Гречка Минстраль",
                     //Recipes = { r1, r2 }
                 };
                 Product svinina = new Product
                 {
-                    Name = "Свинина",
+                    NameProduct = "Свинина",
                     AmountInGramm = 4000,
                     Note = "Нарезанная кусочками замороженная"
                 };
                 Product luk = new Product
                 {
-                    Name = "Лук",
+                    NameProduct = "Лук",
                     AmountInPieces = 20
                 };
                 Product morkov = new Product
                 {
-                    Name = "Морковь",
+                    NameProduct = "Морковь",
                     AmountInPieces = 20
                 };
                 Product tomatPasta = new Product
                 {
-                    Name = "Паста томатная",
+                    NameProduct = "Паста томатная",
                     AmountInPieces = 2,
                     Note = "100 гр в банке"
                 };
                 Product sosiski = new Product
                 {
-                    Name = "Сосиски",
+                    NameProduct = "Сосиски",
                     AmountInPieces = 10
                 };
 
@@ -63,7 +63,7 @@ namespace KitchenDB_EFCore
 
                 Recipe r1 = new Recipe
                 {
-                    Name = "Гречка по купечески со свининой на сковороде",
+                    NameRecipe = "Гречка по купечески со свининой на сковороде",
                     Сookingtime = "40 минут",
                     TypeRecipeTimesOfDay = "Второе",
                     TotalEnergyValue = 156,
@@ -74,7 +74,7 @@ namespace KitchenDB_EFCore
                 };
                 Recipe r2 = new Recipe
                 {
-                    Name = "Гречка с сосисками",
+                    NameRecipe = "Гречка с сосисками",
                     Сookingtime = "30 минут",
                     TypeRecipeTimesOfDay = "Второе",
                     TotalEnergyValue = 175,

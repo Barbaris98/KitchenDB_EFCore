@@ -10,7 +10,7 @@ namespace KitchenDB_EFCore
     public class Product
     {
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string NameProduct { get; set; } = null!;
         public int? AmountInGramm { get; set; }// gramm
         public int? AmountInPieces { get; set; }// в штуках
         public string? Note { get; set; }
