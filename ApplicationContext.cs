@@ -17,7 +17,7 @@ namespace KitchenDB_EFCore
             Database.EnsureDeleted();   // удаляем бд со старой схемой
             Database.EnsureCreated();   // создаем бд с новой схемой
 
-            // воспользуемся подобной реализацией Миграции
+            
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

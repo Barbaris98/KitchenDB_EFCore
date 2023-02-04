@@ -19,7 +19,7 @@ namespace KitchenDB_EFCore
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
 
-
+            /* заполним нач. значениями
             using (ApplicationContext db = new ApplicationContext())
             {
                 
@@ -88,7 +88,7 @@ namespace KitchenDB_EFCore
 
                 db.SaveChanges();
             }
-
+            */
 
 
         }

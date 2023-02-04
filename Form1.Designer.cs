@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.создатьОтчётToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,26 +37,15 @@
             this.сервисToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.FatsEnergyValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.СarbohydratesEnergyValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProteinsEnergyValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalEnergyValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TypeRecipeTimesOfDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Сookingtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.applicationContextBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountInGramm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountInPieces = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.applicationContextBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,7 +74,7 @@
             this.отчётПоПродуктамToolStripMenuItem,
             this.отчётПоРецептамToolStripMenuItem});
             this.создатьОтчётToolStripMenuItem.Name = "создатьОтчётToolStripMenuItem";
-            this.создатьОтчётToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.создатьОтчётToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.создатьОтчётToolStripMenuItem.Text = "Создать отчёт";
             // 
             // отчётПоПродуктамToolStripMenuItem
@@ -118,7 +108,8 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Controls.Add(this.dataGridView2);
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -126,6 +117,26 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(800, 323);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(164, 73);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(808, 26);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(156, 65);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabPage2
             // 
@@ -137,103 +148,18 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // FatsEnergyValue
+            // applicationContextBindingSource
             // 
-            this.FatsEnergyValue.HeaderText = "FatsEnergyValue";
-            this.FatsEnergyValue.Name = "FatsEnergyValue";
-            // 
-            // СarbohydratesEnergyValue
-            // 
-            this.СarbohydratesEnergyValue.HeaderText = "СarbohydratesEnergyValue";
-            this.СarbohydratesEnergyValue.Name = "СarbohydratesEnergyValue";
-            // 
-            // ProteinsEnergyValue
-            // 
-            this.ProteinsEnergyValue.HeaderText = "ProteinsEnergyValue";
-            this.ProteinsEnergyValue.Name = "ProteinsEnergyValue";
-            // 
-            // TotalEnergyValue
-            // 
-            this.TotalEnergyValue.HeaderText = "TotalEnergyValue";
-            this.TotalEnergyValue.Name = "TotalEnergyValue";
-            // 
-            // TypeRecipeTimesOfDay
-            // 
-            this.TypeRecipeTimesOfDay.HeaderText = "TypeRecipeTimesOfDay";
-            this.TypeRecipeTimesOfDay.Name = "TypeRecipeTimesOfDay";
-            // 
-            // Сookingtime
-            // 
-            this.Сookingtime.HeaderText = "Сookingtime";
-            this.Сookingtime.Name = "Сookingtime";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.Сookingtime,
-            this.TypeRecipeTimesOfDay,
-            this.TotalEnergyValue,
-            this.ProteinsEnergyValue,
-            this.СarbohydratesEnergyValue,
-            this.FatsEnergyValue});
-            this.dataGridView2.Location = new System.Drawing.Point(19, 272);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(889, 160);
-            this.dataGridView2.TabIndex = 2;
+            this.applicationContextBindingSource.DataSource = typeof(KitchenDB_EFCore.ApplicationContext);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.NameProduct,
-            this.AmountInGramm,
-            this.AmountInPieces,
-            this.Note});
             this.dataGridView1.Location = new System.Drawing.Point(29, 26);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(594, 197);
-            this.dataGridView1.TabIndex = 5;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            // 
-            // NameProduct
-            // 
-            this.NameProduct.HeaderText = "NameProduct";
-            this.NameProduct.Name = "NameProduct";
-            // 
-            // AmountInGramm
-            // 
-            this.AmountInGramm.HeaderText = "AmountInGramm";
-            this.AmountInGramm.Name = "AmountInGramm";
-            // 
-            // AmountInPieces
-            // 
-            this.AmountInPieces.HeaderText = "AmountInPieces";
-            this.AmountInPieces.Name = "AmountInPieces";
-            // 
-            // Note
-            // 
-            this.Note.HeaderText = "Note";
-            this.Note.Name = "Note";
+            this.dataGridView1.Size = new System.Drawing.Size(633, 240);
+            this.dataGridView1.TabIndex = 8;
             // 
             // Form1
             // 
@@ -250,7 +176,7 @@
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.applicationContextBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -268,20 +194,9 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private DataGridView dataGridView2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn Сookingtime;
-        private DataGridViewTextBoxColumn TypeRecipeTimesOfDay;
-        private DataGridViewTextBoxColumn TotalEnergyValue;
-        private DataGridViewTextBoxColumn ProteinsEnergyValue;
-        private DataGridViewTextBoxColumn СarbohydratesEnergyValue;
-        private DataGridViewTextBoxColumn FatsEnergyValue;
+        private BindingSource applicationContextBindingSource;
+        private Button button2;
+        private Button button1;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn NameProduct;
-        private DataGridViewTextBoxColumn AmountInGramm;
-        private DataGridViewTextBoxColumn AmountInPieces;
-        private DataGridViewTextBoxColumn Note;
     }
 }
