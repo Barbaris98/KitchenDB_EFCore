@@ -37,16 +37,18 @@
             this.сервисToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.applicationContextBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.applicationContextBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.applicationContextBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -74,7 +76,7 @@
             this.отчётПоПродуктамToolStripMenuItem,
             this.отчётПоРецептамToolStripMenuItem});
             this.создатьОтчётToolStripMenuItem.Name = "создатьОтчётToolStripMenuItem";
-            this.создатьОтчётToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.создатьОтчётToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.создатьОтчётToolStripMenuItem.Text = "Создать отчёт";
             // 
             // отчётПоПродуктамToolStripMenuItem
@@ -107,6 +109,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dataGridView2);
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.button1);
@@ -118,9 +121,18 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(29, 26);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(738, 176);
+            this.dataGridView1.TabIndex = 8;
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(800, 323);
+            this.button2.Location = new System.Drawing.Point(808, 267);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(164, 73);
             this.button2.TabIndex = 7;
@@ -152,14 +164,14 @@
             // 
             this.applicationContextBindingSource.DataSource = typeof(KitchenDB_EFCore.ApplicationContext);
             // 
-            // dataGridView1
+            // dataGridView2
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(29, 26);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(633, 240);
-            this.dataGridView1.TabIndex = 8;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(33, 230);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 25;
+            this.dataGridView2.Size = new System.Drawing.Size(734, 205);
+            this.dataGridView2.TabIndex = 9;
             // 
             // Form1
             // 
@@ -176,8 +188,9 @@
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.applicationContextBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.applicationContextBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,5 +211,6 @@
         private Button button2;
         private Button button1;
         private DataGridView dataGridView1;
+        private DataGridView dataGridView2;
     }
 }

@@ -93,7 +93,7 @@ namespace KitchenDB_EFCore
                 db.Products.Load();
 
                 dataGridView1.DataSource = db.Products.ToList();
-
+                dataGridView2.DataSource = db.Recipes.ToList();
                 //dataGridView1.DataSource = db.Products.Local.ToBindingList();
 
                 //foreach (string[] stringView in products)

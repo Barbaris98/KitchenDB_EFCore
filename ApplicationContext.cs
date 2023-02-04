@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace KitchenDB_EFCore
 {
@@ -14,7 +15,7 @@ namespace KitchenDB_EFCore
         public DbSet<Recipe> Recipes { get; set; } = null!;
         public ApplicationContext()
         {
-            Database.EnsureDeleted();   // удаляем бд со старой схемой
+            //Database.EnsureDeleted();   // удаляем бд со старой схемой
             Database.EnsureCreated();   // создаем бд с новой схемой
 
             
@@ -23,6 +24,9 @@ namespace KitchenDB_EFCore
         {
             optionsBuilder.UseSqlite("Data Source=Products.db");
         }
+
+
+
     }
 
 
