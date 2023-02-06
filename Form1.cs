@@ -11,7 +11,34 @@ namespace KitchenDB_EFCore
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//Вывод всей инфы по продуктам
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                //var products = (from product in db.Products select product).ToList();
+                //dataGridView1.Rows.Add(products);
+
+                db.Products.Load();
+
+                dataGridView1.DataSource = db.Products.ToList();
+                //dataGridView2.DataSource = db.Recipes.ToList();
+                //dataGridView1.DataSource = db.Products.Local.ToBindingList();
+
+                //foreach (string[] stringView in products)
+                //{
+                //   dataGridView1.Rows.Add(stringView);
+                //}
+
+
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void инициализироватьНачДаннымиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -83,26 +110,9 @@ namespace KitchenDB_EFCore
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                //var products = (from product in db.Products select product).ToList();
-                //dataGridView1.Rows.Add(products);
-
-                db.Products.Load();
-
-                dataGridView1.DataSource = db.Products.ToList();
-                dataGridView2.DataSource = db.Recipes.ToList();
-                //dataGridView1.DataSource = db.Products.Local.ToBindingList();
-
-                //foreach (string[] stringView in products)
-                //{
-                //   dataGridView1.Rows.Add(stringView);
-                //}
 
 
-            }
-        }
+
+
     }
 }
