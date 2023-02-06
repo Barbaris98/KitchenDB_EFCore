@@ -36,8 +36,7 @@
             this.отчётПоРецептамToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сервисToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.инициализироватьНачДаннымиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.очиститьБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сброситьБДПоумолчаниюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
@@ -46,9 +45,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.applicationContextBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -109,24 +108,17 @@
             // настройкиToolStripMenuItem
             // 
             this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.инициализироватьНачДаннымиToolStripMenuItem,
-            this.очиститьБДToolStripMenuItem});
+            this.сброситьБДПоумолчаниюToolStripMenuItem});
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
             this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.настройкиToolStripMenuItem.Text = "Настройки";
             // 
-            // инициализироватьНачДаннымиToolStripMenuItem
+            // сброситьБДПоумолчаниюToolStripMenuItem
             // 
-            this.инициализироватьНачДаннымиToolStripMenuItem.Name = "инициализироватьНачДаннымиToolStripMenuItem";
-            this.инициализироватьНачДаннымиToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
-            this.инициализироватьНачДаннымиToolStripMenuItem.Text = "Инициализировать нач данными";
-            this.инициализироватьНачДаннымиToolStripMenuItem.Click += new System.EventHandler(this.инициализироватьНачДаннымиToolStripMenuItem_Click);
-            // 
-            // очиститьБДToolStripMenuItem
-            // 
-            this.очиститьБДToolStripMenuItem.Name = "очиститьБДToolStripMenuItem";
-            this.очиститьБДToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
-            this.очиститьБДToolStripMenuItem.Text = "Очистить БД";
+            this.сброситьБДПоумолчаниюToolStripMenuItem.Name = "сброситьБДПоумолчаниюToolStripMenuItem";
+            this.сброситьБДПоумолчаниюToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.сброситьБДПоумолчаниюToolStripMenuItem.Text = "Сбросить БД по-умолчанию";
+            this.сброситьБДПоумолчаниюToolStripMenuItem.Click += new System.EventHandler(this.сброситьБДПоумолчаниюToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
@@ -162,6 +154,7 @@
             this.button4.TabIndex = 10;
             this.button4.Text = "Редактировать";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -172,6 +165,7 @@
             this.button3.TabIndex = 9;
             this.button3.Text = "Удалить";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dataGridView1
             // 
@@ -180,6 +174,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(6, 6);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(738, 311);
             this.dataGridView1.TabIndex = 8;
             // 
@@ -217,6 +212,15 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(764, 69);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(174, 15);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "ПОСМОТРТЕЬ ЕЩЁ РЕЦЕПТЫЭ";
+            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -229,15 +233,6 @@
             // applicationContextBindingSource
             // 
             this.applicationContextBindingSource.DataSource = typeof(KitchenDB_EFCore.ApplicationContext);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(764, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(174, 15);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "ПОСМОТРТЕЬ ЕЩЁ РЕЦЕПТЫЭ";
             // 
             // Form1
             // 
@@ -281,10 +276,9 @@
         private DataGridView dataGridView1;
         private DataGridView dataGridView2;
         private ToolStripMenuItem настройкиToolStripMenuItem;
-        private ToolStripMenuItem инициализироватьНачДаннымиToolStripMenuItem;
-        private ToolStripMenuItem очиститьБДToolStripMenuItem;
         private Button button4;
         private Button button3;
         private Label label1;
+        private ToolStripMenuItem сброситьБДПоумолчаниюToolStripMenuItem;
     }
 }

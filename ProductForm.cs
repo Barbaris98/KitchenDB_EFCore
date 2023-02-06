@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace KitchenDB_EFCore
 {
-    public partial class Form2 : Form
+    public partial class ProductForm : Form
     {
-        public Form2()
+        public ProductForm()
         {
             InitializeComponent();
         }

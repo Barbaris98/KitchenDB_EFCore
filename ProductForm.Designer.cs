@@ -1,6 +1,6 @@
 ﻿namespace KitchenDB_EFCore
 {
-    partial class Form2
+    partial class ProductForm
     {
         /// <summary>
         /// Required designer variable.
