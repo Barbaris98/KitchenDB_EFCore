@@ -23,7 +23,7 @@ namespace KitchenDB_EFCore
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)// Добавить
         {
             ProductForm productForm= new ProductForm();
 
@@ -73,6 +73,7 @@ namespace KitchenDB_EFCore
         private void сброситьБДПоумолчаниюToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Надо будет доделать эту фишку Бдует полезно.
+            // В начале будет выполеяться sql запрос на очистку, потом код ниже
             
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -225,6 +226,162 @@ namespace KitchenDB_EFCore
                 }
 
             }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)//Вывод всей инфы по Рецептам
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Recipes.Load();
+                dataGridView2.DataSource= db.Recipes.ToList();
+
+            }
+
+        }
+
+        private void button8_Click(object sender, EventArgs e) //Добавить
+        {
+            RecipeForm recipeForm = new RecipeForm();
+
+            DialogResult result = recipeForm.ShowDialog(this);
+            if (result == DialogResult.Cancel)
+                return;
+
+            Recipe recipe = new Recipe();
+            recipe.NameRecipe = recipeForm.textBox1.Text;
+            recipe.Сookingtime = recipeForm.textBox2.Text;// может имет null
+            //player.Position = plForm.comboBox1.SelectedItem.ToString();
+            recipe.TypeRecipeTimesOfDay = recipeForm.comboBox1.SelectedItem.ToString();
+            //можно не заполнять эти 3 свойства
+            try
+            {
+                recipe.TotalEnergyValue = Convert.ToInt32(recipeForm.textBox3.Text);
+            }
+            catch { }
+            try
+            {
+                recipe.ProteinsEnergyValue = Convert.ToInt32(recipeForm.textBox4.Text);
+            }
+            catch { }
+            try
+            {
+                recipe.СarbohydratesEnergyValue = Convert.ToInt32(recipeForm.textBox5.Text);
+            }
+            catch { }
+            try
+            {
+                recipe.FatsEnergyValue = Convert.ToInt32(recipeForm.textBox6.Text);
+            }
+            catch { }
+
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Recipes.Add(recipe);
+                db.SaveChanges();
+
+            }
+            MessageBox.Show("Продукт добавлен!");
+
+            //автообновление вывода dataGridView1
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Recipes.Load();// вроде не нужен.... но пусть будет,
+                                   // ещё раз загрузим в контекст/ обновим его 
+                dataGridView2.DataSource = db.Recipes.ToList();
+
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)// Удаление
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView2.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+
+                    Recipe recipe = db.Recipes.Find(id);
+                    db.Recipes.Remove(recipe);
+                    db.SaveChanges();
+
+                    MessageBox.Show("Объект удален");
+                }
+                //автообновление вывода dataGridView1
+                db.Recipes.Load();
+                dataGridView2.DataSource = db.Recipes.ToList();
+            }
+
+        }
+        private void button6_Click(object sender, EventArgs e)//Редактировать
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView2.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+
+                    Recipe recipe = db.Recipes.Find(id);
+                    RecipeForm recipeForm = new RecipeForm();
+
+                    recipeForm.textBox1.Text = recipe.NameRecipe;
+                    recipeForm.textBox2.Text = recipe.Сookingtime;
+                    recipeForm.comboBox1.Text = recipe.TypeRecipeTimesOfDay;
+                    recipeForm.textBox3.Text = recipe.TotalEnergyValue.ToString();
+                    recipeForm.textBox4.Text = recipe.ProteinsEnergyValue.ToString();
+                    recipeForm.textBox5.Text = recipe.СarbohydratesEnergyValue.ToString();
+                    recipeForm.textBox6.Text = recipe.FatsEnergyValue.ToString();
+
+
+                    DialogResult result = recipeForm.ShowDialog(this);
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    recipe.NameRecipe = recipeForm.textBox1.Text;
+                    recipe.Сookingtime = recipeForm.textBox2.Text;// может имет null
+                                                                  //player.Position = plForm.comboBox1.SelectedItem.ToString();
+                    recipe.TypeRecipeTimesOfDay = recipeForm.comboBox1.SelectedItem.ToString();
+                    //можно не заполнять эти 3 свойства
+                    try
+                    {
+                        recipe.TotalEnergyValue = Convert.ToInt32(recipeForm.textBox3.Text);
+                    }
+                    catch { }
+                    try
+                    {
+                        recipe.ProteinsEnergyValue = Convert.ToInt32(recipeForm.textBox4.Text);
+                    }
+                    catch { }
+                    try
+                    {
+                        recipe.СarbohydratesEnergyValue = Convert.ToInt32(recipeForm.textBox5.Text);
+                    }
+                    catch { }
+                    try
+                    {
+                        recipe.FatsEnergyValue = Convert.ToInt32(recipeForm.textBox6.Text);
+                    }
+                    catch { }
+
+                    db.SaveChanges();
+                    //dataGridView1.Refresh(); // не работает
+                    db.Recipes.Load();// вроде не нужен.... но пусть будет,
+                                       // ещё раз загрузим в контекст/ обноввим его 
+                    dataGridView2.DataSource = db.Recipes.ToList();
+                    MessageBox.Show("Объект изменён!");
+                }
+            }
+
+
+
 
         }
     }
