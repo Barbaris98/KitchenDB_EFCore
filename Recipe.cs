@@ -19,7 +19,7 @@ namespace KitchenDB_EFCore
         public int? ProteinsEnergyValue { get; set; }
         public int? СarbohydratesEnergyValue { get; set; }
         public int? FatsEnergyValue { get; set; }
-        //public string? TextRecipe { get; set; }
+
         
         public List<Product> Products { get; set; } = new();
 
