@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Numerics;
+using System.Diagnostics;
 
 namespace KitchenDB_EFCore
 {
@@ -11,6 +12,11 @@ namespace KitchenDB_EFCore
             InitializeComponent();
 
         }
+        /*
+         * можно ещё добавить функционал при закритии приложения: Да - Отмена
+
+
+        */
 
         private void button1_Click(object sender, EventArgs e)//Вывод всей инфы по продуктам
         {
@@ -379,9 +385,24 @@ namespace KitchenDB_EFCore
                     MessageBox.Show("Объект изменён!");
                 }
             }
+        }
 
-
-
+        private void button9_Click(object sender, EventArgs e)// Открыть Сайт с рецептами
+        {
+            try
+            {
+                ProcessStartInfo procInfo = new ProcessStartInfo();
+                // исполняемый файл программы - браузер хром
+                procInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome";
+                // аргументы запуска - адрес интернет-ресурса
+                procInfo.Arguments = "https://1000.menu/";
+                Process.Start(procInfo);
+            }
+            catch
+            {
+                MessageBox.Show("Не найден браузер Google Chrome по адрессу " +
+                    "C:\\Program Files\\Google\\Chrome\\Application\\chrome");
+            }
 
         }
     }

@@ -49,9 +49,9 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.applicationContextBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button9 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -205,11 +205,11 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button9);
             this.tabPage2.Controls.Add(this.button6);
             this.tabPage2.Controls.Add(this.button7);
             this.tabPage2.Controls.Add(this.button8);
             this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.dataGridView2);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
@@ -263,15 +263,6 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(803, 401);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(174, 15);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "ПОСМОТРТЕЬ ЕЩЁ РЕЦЕПТЫЭ";
-            // 
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
@@ -286,6 +277,17 @@
             // applicationContextBindingSource
             // 
             this.applicationContextBindingSource.DataSource = typeof(KitchenDB_EFCore.ApplicationContext);
+            // 
+            // button9
+            // 
+            this.button9.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button9.Location = new System.Drawing.Point(862, 388);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(134, 50);
+            this.button9.TabIndex = 16;
+            this.button9.Text = "Посмотреть ещё рецепты";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // Form1
             // 
@@ -304,7 +306,6 @@
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.applicationContextBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -331,11 +332,11 @@
         private ToolStripMenuItem настройкиToolStripMenuItem;
         private Button button4;
         private Button button3;
-        private Label label1;
         private ToolStripMenuItem сброситьБДПоумолчаниюToolStripMenuItem;
         private Button button6;
         private Button button7;
         private Button button8;
         private Button button5;
+        private Button button9;
     }
 }
