@@ -11,6 +11,20 @@ namespace KitchenDB_EFCore
         {
             InitializeComponent();
 
+            //создадим элемент меню
+            ToolStripMenuItem shoMore = new ToolStripMenuItem("Подробнее");
+
+            //Добавление элемента меню
+            contextMenuStrip1.Items.Add( shoMore );
+
+            //Ассоциируем контекстное меню с гридом
+            dataGridView2.ContextMenuStrip = contextMenuStrip1;
+
+            //Установим обработчик события для меню
+            shoMore.Click += shoMore_Click;
+
+
+
         }
         /*
          * можно ещё добавить функционал при закритии приложения: Да - Отмена
@@ -405,5 +419,40 @@ namespace KitchenDB_EFCore
             }
 
         }
+
+        void shoMore_Click(object sender, EventArgs e)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    /*
+                    //проеверяем что точно строку выбрали 
+                    int index = dataGridView2.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+                    */
+                    int id = int.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+
+
+
+                    //по соответствующему id
+                    Recipe recipe = db.Recipes.Find(id);
+                    RecipeInfo recipeInfo = new RecipeInfo();//созд и показать экз формы 
+
+                    recipeInfo.textBox1.Text = recipe.NameRecipe;
+                    recipeInfo.Show();
+
+                }
+                
+            }
+
+        }
+
+
+
+
     }
 }
