@@ -45,6 +45,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -211,11 +213,32 @@
             this.comboBox1.Size = new System.Drawing.Size(202, 23);
             this.comboBox1.TabIndex = 18;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(484, 113);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(104, 19);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Ингредиенты:";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(484, 155);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(341, 199);
+            this.listBox1.TabIndex = 20;
+            // 
             // RecipeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 475);
+            this.ClientSize = new System.Drawing.Size(861, 475);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -260,5 +283,7 @@
         private Button button1;
         private Button button2;
         protected internal ComboBox comboBox1;
+        private Label label9;
+        protected internal ListBox listBox1;
     }
 }

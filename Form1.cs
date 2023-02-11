@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Numerics;
 using System.Diagnostics;
+using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KitchenDB_EFCore
 {
@@ -294,18 +297,15 @@ namespace KitchenDB_EFCore
                 recipe.FatsEnergyValue = Convert.ToInt32(recipeForm.textBox6.Text);
             }
             catch { }
+            recipe.Products = new List<Product>();//будет содержать определённые продукты
 
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Recipes.Add(recipe);
-                db.SaveChanges();
-
-            }
+            
             MessageBox.Show("Продукт добавлен!");
 
             //автообновление вывода dataGridView1
             using (ApplicationContext db = new ApplicationContext())
             {
+
                 db.Recipes.Load();// вроде не нужен.... но пусть будет,
                                    // ещё раз загрузим в контекст/ обновим его 
                 dataGridView2.DataSource = db.Recipes.ToList();
@@ -420,23 +420,13 @@ namespace KitchenDB_EFCore
 
         }
 
-        void shoMore_Click(object sender, EventArgs e)
+        void shoMore_Click(object sender, EventArgs e)// ПКМ - на строке - Подробнее о рецепте
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 if (dataGridView2.SelectedRows.Count > 0)
                 {
-                    /*
-                    //проеверяем что точно строку выбрали 
-                    int index = dataGridView2.SelectedRows[0].Index;
-                    int id = 0;
-                    bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
-                    if (converted == false)
-                        return;
-                    */
                     int id = int.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
-
-
 
                     //по соответствующему id
                     Recipe recipe = db.Recipes.Find(id);
@@ -445,11 +435,35 @@ namespace KitchenDB_EFCore
                     recipeInfo.textBox1.Text = recipe.NameRecipe;
                     recipeInfo.Show();
 
-                }
-                
-            }
+                    //var recInfo = db.Recipes.Include(r => r.Products).ToList();
 
+                    //int idFaind = 0;
+                    //var recInfo = db.Recipes.Include(r => r.Products).Where(id).ToList();
+
+                    var value = string.Join(", ", db.Recipes.Include(r => r.Products));
+                    recipeInfo.textBox2.Text = value.ToString();
+
+
+
+                    List<Product> products = db.Products.Include(p => p.Recipes.Where(p => p.Recipes.Id = id));
+                    recipeInfo.listBox1.DataSource = products;
+                    recipeInfo.listBox1.ValueMember = "Id";
+                    recipeInfo.listBox1.DisplayMember = "NameProduct";
+
+                    //var recipeConsistOf = db.Recipes.Include(r => r.Products).ToList();
+                    //textBox2.Text = recipeConsistOf.ToList();
+                    //textBox2.Text = db.Recipes.Include(r => r.Products).ToList();
+
+                    //'nj hf,jnftn!
+                    //textBox2.Text = Convert.ToString(db.Recipes.Include(r => r.Products).ToList());
+
+
+                }
+            }
         }
+
+
+
 
 
 
