@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Drawing;
+
 
 namespace KitchenDB_EFCore
 {
@@ -297,9 +299,11 @@ namespace KitchenDB_EFCore
                 recipe.FatsEnergyValue = Convert.ToInt32(recipeForm.textBox6.Text);
             }
             catch { }
-            recipe.Products = new List<Product>();//будет содержать определённые продукты
 
-            
+
+            //recipe.Products = new List<Product>();//будет содержать определённые продукты
+            //Products = { grechka, svinina, luk, morkov, tomatPasta } ВОТ ТАК ПРАВИЛЬНО!!
+
             MessageBox.Show("Продукт добавлен!");
 
             //автообновление вывода dataGridView1
@@ -427,7 +431,7 @@ namespace KitchenDB_EFCore
                 if (dataGridView2.SelectedRows.Count > 0)
                 {
                     int id = int.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
-
+                    
                     //по соответствующему id
                     Recipe recipe = db.Recipes.Find(id);
                     RecipeInfo recipeInfo = new RecipeInfo();//созд и показать экз формы 
@@ -439,16 +443,62 @@ namespace KitchenDB_EFCore
 
                     //int idFaind = 0;
                     //var recInfo = db.Recipes.Include(r => r.Products).Where(id).ToList();
-
+                    // можно так, но это не совсем верно....
                     var value = string.Join(", ", db.Recipes.Include(r => r.Products));
                     recipeInfo.textBox2.Text = value.ToString();
 
+                    
+                    //List<Product> products = db.Products.Include(p => p.Recipes.Where(p => p.Recipes.Id = id));
+                    //List<Product> products = db.Products.Include(p => p.Recipes).ToList();
+                    List<Product> products = new List<Product>();
+
+                    try
+                    {
+                        //1) неверно..
+                        products = db.Products.Where(p => p.Recipes.Id == id).ToList();
 
 
-                    List<Product> products = db.Products.Include(p => p.Recipes.Where(p => p.Recipes.Id = id));
+                        //2) поробуем наш выбранный id рецепта засунуть в правильно типизирванную переменную
+                        List<Recipe> myIdRecipe = new List<Recipe>(id);
+                        products = db.Products.Where(p => p.Recipes == myIdRecipe).ToList();
+                        // ! срабатывает catch..
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Ошибка");
+                    }
+                    
                     recipeInfo.listBox1.DataSource = products;
                     recipeInfo.listBox1.ValueMember = "Id";
                     recipeInfo.listBox1.DisplayMember = "NameProduct";
+                    /*
+                    //List<Product> recipes = db.Recipes.Include(r => r.Products).ToList();
+                    var rec = db.Products.Include(r => r.Recipes).ToList();//Продукты которые содерж в этом рецепте...НО выводит все продукты из БД
+                   //db.Products.Include(p => p.Recipes.Where(p => p.Recipes.Id = id)); НЕ совсем верно...
+                    recipeInfo.listBox1.DataSource = rec;
+                    recipeInfo.listBox1.DisplayMember = "NameProduct";
+                    */
+                    /*
+        public async Task<List<DrawSpecification>> GetDrawSpecificationsAsync(DrawSystem drawSystem)
+        {
+            List<DrawSpecification> drawSpecifications = new List<DrawSpecification>();
+
+            try
+            {
+                drawSpecifications = await _drawContext.DrawSpecifications
+                    .Where(ds => ds.DrawSystemID == drawSystem.DrawSystemID)
+                    .OrderBy(ds => ds.DSPositionNum)
+                    .ToListAsync();
+
+                return drawSpecifications;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Ошибка загрузки данных.", ex);
+            }
+        }
+        
+        */
 
                     //var recipeConsistOf = db.Recipes.Include(r => r.Products).ToList();
                     //textBox2.Text = recipeConsistOf.ToList();
@@ -457,14 +507,38 @@ namespace KitchenDB_EFCore
                     //'nj hf,jnftn!
                     //textBox2.Text = Convert.ToString(db.Recipes.Include(r => r.Products).ToList());
 
+                    /*работает но выводит все рецепты сука  
+                    var rec = db.Recipes.Include(r => r.Products).ToList();
+                    recipeInfo.listBox1.DataSource = rec;
+                    recipeInfo.listBox1.DisplayMember = "NameRecipe";
 
+                    */
                 }
             }
         }
+        //
+        //
+        /*
+        public async Task<List<DrawSpecification>> GetDrawSpecificationsAsync(DrawSystem drawSystem)
+        {
+            List<DrawSpecification> drawSpecifications = new List<DrawSpecification>();
 
+            try
+            {
+                drawSpecifications = await _drawContext.DrawSpecifications
+                    .Where(ds => ds.DrawSystemID == drawSystem.DrawSystemID)
+                    .OrderBy(ds => ds.DSPositionNum)
+                    .ToListAsync();
 
-
-
+                return drawSpecifications;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Ошибка загрузки данных.", ex);
+            }
+        }
+        
+        */
 
 
 
