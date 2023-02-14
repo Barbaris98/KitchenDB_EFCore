@@ -450,27 +450,33 @@ namespace KitchenDB_EFCore
                     
                     //List<Product> products = db.Products.Include(p => p.Recipes.Where(p => p.Recipes.Id = id));
                     //List<Product> products = db.Products.Include(p => p.Recipes).ToList();
-                    List<Product> products = new List<Product>();
+                    //List<Product> products = new List<Product>();
+                    //
 
                     try
                     {
                         //1) неверно..
-                        products = db.Products.Where(p => p.Recipes.Id == id).ToList();
+                        //products = db.Products.Where(p => p.Recipes.Id == id).ToList();
 
+                        var products = db.Products.Include(p => p.Recipes.Where(x => x.Id == id)).ToList();
 
                         //2) поробуем наш выбранный id рецепта засунуть в правильно типизирванную переменную
-                        List<Recipe> myIdRecipe = new List<Recipe>(id);
-                        products = db.Products.Where(p => p.Recipes == myIdRecipe).ToList();
+                        //List<Recipe> myIdRecipe = new List<Recipe>(id);
+                        //products = db.Products.Where(p => p.Recipes == myIdRecipe).ToList();
                         // ! срабатывает catch..
+
+                        recipeInfo.listBox1.DataSource = products;
+                        //recipeInfo.listBox1.ValueMember = "Id";
+                        recipeInfo.listBox1.DisplayMember = "NameProduct";
                     }
                     catch
                     {
                         MessageBox.Show("Ошибка");
                     }
-                    
-                    recipeInfo.listBox1.DataSource = products;
-                    recipeInfo.listBox1.ValueMember = "Id";
-                    recipeInfo.listBox1.DisplayMember = "NameProduct";
+                    //!var products = db.Products.Include(p => p.Recipes.Where(x => x.Id == id)).ToList();
+                    //!recipeInfo.listBox1.DataSource = products;
+                    //recipeInfo.listBox1.ValueMember = "Id";
+                    //!recipeInfo.listBox1.DisplayMember = "NameProduct";
                     /*
                     //List<Product> recipes = db.Recipes.Include(r => r.Products).ToList();
                     var rec = db.Products.Include(r => r.Recipes).ToList();//Продукты которые содерж в этом рецепте...НО выводит все продукты из БД
