@@ -99,7 +99,8 @@ namespace KitchenDB_EFCore
         {
             // Надо будет доделать эту фишку Бдует полезно.
             // В начале будет выполеяться sql запрос на очистку, потом код ниже
-            
+
+
             using (ApplicationContext db = new ApplicationContext())
             {
 
@@ -197,7 +198,7 @@ namespace KitchenDB_EFCore
 
         }
 
-        private void button4_Click(object sender, EventArgs e)// редактировать
+        private void button4_Click(object sender, EventArgs e)//редактировать
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -457,8 +458,8 @@ namespace KitchenDB_EFCore
                     {
                         //1) неверно..
                         //products = db.Products.Where(p => p.Recipes.Id == id).ToList();
-
-                        var products = db.Products.Include(p => p.Recipes.Where(x => x.Id == id)).ToList();
+                        List<Product> products = new List<Product>();
+                        products = db.Products.Include(p => p.Recipes.Where(x => x.Id == id)).ToList();
 
                         //2) поробуем наш выбранный id рецепта засунуть в правильно типизирванную переменную
                         //List<Recipe> myIdRecipe = new List<Recipe>(id);
