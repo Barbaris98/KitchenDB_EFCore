@@ -100,6 +100,12 @@ namespace KitchenDB_EFCore
             // Надо будет доделать эту фишку Бдует полезно.
             // В начале будет выполеяться sql запрос на очистку, потом код ниже
 
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Database.EnsureDeleted();
+
+               
+            }
 
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -440,31 +446,15 @@ namespace KitchenDB_EFCore
                     recipeInfo.textBox1.Text = recipe.NameRecipe;
                     recipeInfo.Show();
 
-                    //var recInfo = db.Recipes.Include(r => r.Products).ToList();
-
-                    //int idFaind = 0;
-                    //var recInfo = db.Recipes.Include(r => r.Products).Where(id).ToList();
-                    // можно так, но это не совсем верно....
+                    
                     var value = string.Join(", ", db.Recipes.Include(r => r.Products));
                     recipeInfo.textBox2.Text = value.ToString();
 
-                    
-                    //List<Product> products = db.Products.Include(p => p.Recipes.Where(p => p.Recipes.Id = id));
-                    //List<Product> products = db.Products.Include(p => p.Recipes).ToList();
-                    //List<Product> products = new List<Product>();
-                    //
-
                     try
                     {
-                        //1) неверно..
-                        //products = db.Products.Where(p => p.Recipes.Id == id).ToList();
                         List<Product> products = new List<Product>();
                         products = db.Products.Include(p => p.Recipes.Where(x => x.Id == id)).ToList();
 
-                        //2) поробуем наш выбранный id рецепта засунуть в правильно типизирванную переменную
-                        //List<Recipe> myIdRecipe = new List<Recipe>(id);
-                        //products = db.Products.Where(p => p.Recipes == myIdRecipe).ToList();
-                        // ! срабатывает catch..
 
                         recipeInfo.listBox1.DataSource = products;
                         //recipeInfo.listBox1.ValueMember = "Id";
@@ -474,52 +464,7 @@ namespace KitchenDB_EFCore
                     {
                         MessageBox.Show("Ошибка");
                     }
-                    //!var products = db.Products.Include(p => p.Recipes.Where(x => x.Id == id)).ToList();
-                    //!recipeInfo.listBox1.DataSource = products;
-                    //recipeInfo.listBox1.ValueMember = "Id";
-                    //!recipeInfo.listBox1.DisplayMember = "NameProduct";
-                    /*
-                    //List<Product> recipes = db.Recipes.Include(r => r.Products).ToList();
-                    var rec = db.Products.Include(r => r.Recipes).ToList();//Продукты которые содерж в этом рецепте...НО выводит все продукты из БД
-                   //db.Products.Include(p => p.Recipes.Where(p => p.Recipes.Id = id)); НЕ совсем верно...
-                    recipeInfo.listBox1.DataSource = rec;
-                    recipeInfo.listBox1.DisplayMember = "NameProduct";
-                    */
-                    /*
-        public async Task<List<DrawSpecification>> GetDrawSpecificationsAsync(DrawSystem drawSystem)
-        {
-            List<DrawSpecification> drawSpecifications = new List<DrawSpecification>();
-
-            try
-            {
-                drawSpecifications = await _drawContext.DrawSpecifications
-                    .Where(ds => ds.DrawSystemID == drawSystem.DrawSystemID)
-                    .OrderBy(ds => ds.DSPositionNum)
-                    .ToListAsync();
-
-                return drawSpecifications;
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Ошибка загрузки данных.", ex);
-            }
-        }
-        
-        */
-
-                    //var recipeConsistOf = db.Recipes.Include(r => r.Products).ToList();
-                    //textBox2.Text = recipeConsistOf.ToList();
-                    //textBox2.Text = db.Recipes.Include(r => r.Products).ToList();
-
-                    //'nj hf,jnftn!
-                    //textBox2.Text = Convert.ToString(db.Recipes.Include(r => r.Products).ToList());
-
-                    /*работает но выводит все рецепты сука  
-                    var rec = db.Recipes.Include(r => r.Products).ToList();
-                    recipeInfo.listBox1.DataSource = rec;
-                    recipeInfo.listBox1.DisplayMember = "NameRecipe";
-
-                    */
+                    
                 }
             }
         }
