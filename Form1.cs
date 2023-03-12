@@ -277,14 +277,18 @@ namespace KitchenDB_EFCore
             using (ApplicationContext db = new ApplicationContext())
             {
                 Recipe recipe = new Recipe();
-
+                /*
+                //работает но добавляет лишь "1" - гречку
                 Product product = db.Products.FirstOrDefault(product => product.Id == 1);
-                // можно замеенить  (product => product.Id == 1); на (y => y.Id == 1); ,без разницы
-                // но так более корректно ,как  понял
-
-
-
+                // можно заменить  (product => product.Id == 1); на (y => y.Id == 1); ,без разницы
+                // но так более корректно ,как  понл 
                 recipe.Products.Add(product);
+                */
+               
+                int x = int.Parse(recipeForm.textBox7.Text);
+                Product product = db.Products.FirstOrDefault(product => product.Id == x);
+                recipe.Products.Add(product);
+                
 
                 recipe.NameRecipe = recipeForm.textBox1.Text;
                 recipe.Сookingtime = recipeForm.textBox2.Text;
@@ -375,6 +379,11 @@ namespace KitchenDB_EFCore
                     if (result == DialogResult.Cancel)
                         return;
 
+                    int x = int.Parse(recipeForm.textBox7.Text);
+                    Product product = db.Products.FirstOrDefault(product => product.Id == x);
+                    recipe.Products.Add(product);
+
+
                     recipe.NameRecipe = recipeForm.textBox1.Text;
                     recipe.Сookingtime = recipeForm.textBox2.Text;// может имет null
                                                                   //player.Position = plForm.comboBox1.SelectedItem.ToString();
@@ -458,33 +467,6 @@ namespace KitchenDB_EFCore
                     }
 
 
-                    //db.Recipes.Include(r => r.Products).FirstOrDefault(x => x.Id == id);
-                    //recipe = db.Recipes.Include(r => r.Products).FirstOrDefault(x => x.Id == id);   
-
-
-
-
-
-                    //var value = string.Join(", ", db.Recipes.Include(r => r.Products));
-                    //recipeInfo.textBox2.Text = value.ToString();
-
-                    /*
-                    try
-                    {
-                        List<Product> products = new List<Product>();
-                        products = db.Products.Include(p => p.Recipes.Where(x => x.Id == id)).ToList();
-
-
-                        recipeInfo.listBox1.DataSource = products;
-                        //recipeInfo.listBox1.ValueMember = "Id";
-                        recipeInfo.listBox1.DisplayMember = "NameProduct";
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Ошибка");
-                    }
-                    
-                    */
                 }
             }
         }
