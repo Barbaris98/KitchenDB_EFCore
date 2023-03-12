@@ -80,20 +80,14 @@ namespace KitchenDB_EFCore
                 db.Products.Add(product);
                 db.SaveChanges();
 
-            }
-            MessageBox.Show("Продукт добавлен!");
-
-            //автообновление вывода dataGridView1
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Products.Load();// вроде не нужен.... но пусть будет,
-                                   // ещё раз загрузим в контекст/ обновим его 
+                db.Products.Load();
                 dataGridView1.DataSource = db.Products.ToList();
 
             }
 
-        }
+            MessageBox.Show("Продукт добавлен!");
 
+        }
 
         private void сброситьБДПоумолчаниюToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -104,7 +98,6 @@ namespace KitchenDB_EFCore
             {
                 db.Database.EnsureDeleted();
 
-               
             }
 
             using (ApplicationContext db = new ApplicationContext())
@@ -280,48 +273,54 @@ namespace KitchenDB_EFCore
             if (result == DialogResult.Cancel)
                 return;
 
-            Recipe recipe = new Recipe();
-            recipe.NameRecipe = recipeForm.textBox1.Text;
-            recipe.Сookingtime = recipeForm.textBox2.Text;// может имет null
-            //player.Position = plForm.comboBox1.SelectedItem.ToString();
-            recipe.TypeRecipeTimesOfDay = recipeForm.comboBox1.SelectedItem.ToString();
-            //можно не заполнять эти 3 свойства
-            try
-            {
-                recipe.TotalEnergyValue = Convert.ToInt32(recipeForm.textBox3.Text);
-            }
-            catch { }
-            try
-            {
-                recipe.ProteinsEnergyValue = Convert.ToInt32(recipeForm.textBox4.Text);
-            }
-            catch { }
-            try
-            {
-                recipe.СarbohydratesEnergyValue = Convert.ToInt32(recipeForm.textBox5.Text);
-            }
-            catch { }
-            try
-            {
-                recipe.FatsEnergyValue = Convert.ToInt32(recipeForm.textBox6.Text);
-            }
-            catch { }
-
-
-            //recipe.Products = new List<Product>();//будет содержать определённые продукты
-            //Products = { grechka, svinina, luk, morkov, tomatPasta } ВОТ ТАК ПРАВИЛЬНО!!
-
-            MessageBox.Show("Продукт добавлен!");
-
-            //автообновление вывода dataGridView1
+            //Recipe recipe = new Recipe();
             using (ApplicationContext db = new ApplicationContext())
             {
+                Recipe recipe = new Recipe();
 
-                db.Recipes.Load();// вроде не нужен.... но пусть будет,
-                                   // ещё раз загрузим в контекст/ обновим его 
+                Product product = db.Products.FirstOrDefault(product => product.Id == 1);
+                // можно замеенить  (product => product.Id == 1); на (y => y.Id == 1); ,без разницы
+                // но так более корректно ,как  понял
+
+
+
+                recipe.Products.Add(product);
+
+                recipe.NameRecipe = recipeForm.textBox1.Text;
+                recipe.Сookingtime = recipeForm.textBox2.Text;
+
+                recipe.TypeRecipeTimesOfDay = recipeForm.comboBox1.SelectedItem.ToString();
+                //можно не заполнять эти 3 свойства
+                try
+                {
+                    recipe.TotalEnergyValue = Convert.ToInt32(recipeForm.textBox3.Text);
+                }
+                catch { }
+                try
+                {
+                    recipe.ProteinsEnergyValue = Convert.ToInt32(recipeForm.textBox4.Text);
+                }
+                catch { }
+                try
+                {
+                    recipe.СarbohydratesEnergyValue = Convert.ToInt32(recipeForm.textBox5.Text);
+                }
+                catch { }
+                try
+                {
+                    recipe.FatsEnergyValue = Convert.ToInt32(recipeForm.textBox6.Text);
+                }
+                catch { }
+
+                db.Recipes.Add(recipe);
+                db.SaveChanges();
+
+                db.Recipes.Load();
                 dataGridView2.DataSource = db.Recipes.ToList();
-
             }
+
+            MessageBox.Show("Продукт добавлен!");
+            
         }
 
         private void button7_Click(object sender, EventArgs e)// Удаление
@@ -438,18 +437,38 @@ namespace KitchenDB_EFCore
                 if (dataGridView2.SelectedRows.Count > 0)
                 {
                     int id = int.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
-                    
+
                     //по соответствующему id
-                    Recipe recipe = db.Recipes.Find(id);
+                    Recipe recipe = db.Recipes.Include(r => r.Products).FirstOrDefault(x => x.Id == id);
+
                     RecipeInfo recipeInfo = new RecipeInfo();//созд и показать экз формы 
 
                     recipeInfo.textBox1.Text = recipe.NameRecipe;
                     recipeInfo.Show();
 
-                    
-                    var value = string.Join(", ", db.Recipes.Include(r => r.Products));
-                    recipeInfo.textBox2.Text = value.ToString();
+                    try
+                    {
+                        recipeInfo.listBox1.DataSource = recipe.Products;
+                        //recipeInfo.listBox1.ValueMember = "Id";
+                        recipeInfo.listBox1.DisplayMember = "NameProduct";
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Ошибка");
+                    }
 
+
+                    //db.Recipes.Include(r => r.Products).FirstOrDefault(x => x.Id == id);
+                    //recipe = db.Recipes.Include(r => r.Products).FirstOrDefault(x => x.Id == id);   
+
+
+
+
+
+                    //var value = string.Join(", ", db.Recipes.Include(r => r.Products));
+                    //recipeInfo.textBox2.Text = value.ToString();
+
+                    /*
                     try
                     {
                         List<Product> products = new List<Product>();
@@ -465,34 +484,11 @@ namespace KitchenDB_EFCore
                         MessageBox.Show("Ошибка");
                     }
                     
+                    */
                 }
             }
         }
-        //
-        //
-        /*
-        public async Task<List<DrawSpecification>> GetDrawSpecificationsAsync(DrawSystem drawSystem)
-        {
-            List<DrawSpecification> drawSpecifications = new List<DrawSpecification>();
-
-            try
-            {
-                drawSpecifications = await _drawContext.DrawSpecifications
-                    .Where(ds => ds.DrawSystemID == drawSystem.DrawSystemID)
-                    .OrderBy(ds => ds.DSPositionNum)
-                    .ToListAsync();
-
-                return drawSpecifications;
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Ошибка загрузки данных.", ex);
-            }
-        }
         
-        */
-
-
 
     }
 }
