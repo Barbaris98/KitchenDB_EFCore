@@ -87,7 +87,7 @@
             this.отчётПоПродуктамToolStripMenuItem,
             this.отчётПоРецептамToolStripMenuItem});
             this.создатьОтчётToolStripMenuItem.Name = "создатьОтчётToolStripMenuItem";
-            this.создатьОтчётToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.создатьОтчётToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.создатьОтчётToolStripMenuItem.Text = "Создать отчёт";
             // 
             // отчётПоПродуктамToolStripMenuItem
@@ -95,6 +95,7 @@
             this.отчётПоПродуктамToolStripMenuItem.Name = "отчётПоПродуктамToolStripMenuItem";
             this.отчётПоПродуктамToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.отчётПоПродуктамToolStripMenuItem.Text = "Отчёт по продуктам";
+            this.отчётПоПродуктамToolStripMenuItem.Click += new System.EventHandler(this.отчётПоПродуктамToolStripMenuItem_Click);
             // 
             // отчётПоРецептамToolStripMenuItem
             // 
@@ -293,7 +294,7 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // Form1
             // 

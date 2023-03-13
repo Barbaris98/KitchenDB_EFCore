@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Drawing;
-
+using ClosedXML.Excel;
 
 namespace KitchenDB_EFCore
 {
@@ -413,7 +413,7 @@ namespace KitchenDB_EFCore
                     db.SaveChanges();
                     //dataGridView1.Refresh(); // не работает
                     db.Recipes.Load();// вроде не нужен.... но пусть будет,
-                                       // ещЄ раз загрузим в контекст/ обноввим его 
+                                       // ещЄ раз загрузим в контекст/ обновим его 
                     dataGridView2.DataSource = db.Recipes.ToList();
                     MessageBox.Show("ќбъект изменЄн!");
                 }
@@ -470,7 +470,44 @@ namespace KitchenDB_EFCore
                 }
             }
         }
-        
 
+        private void отчЄтѕоѕродуктамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var path = Path.Combine(Environment.CurrentDirectory, "Export", "export.xlsx");
+
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // так всЄ работает, топорно ,но работает 
+                /*
+                var products = db.Products.ToList();
+                var workBook = new XLWorkbook();
+                //workBook.Worksheets.Add(products);
+
+                var sheet = workBook.Worksheets.Add("Products");
+                //смотри https://github.com/ClosedXML/ClosedXML/wiki
+                // примеры есть, но несовсем пон€л... просто втавил таблицу
+                //                                      по первой €чейке
+                sheet.Cell("A1").InsertTable(products);
+
+                workBook.SaveAs(path);
+                */
+
+                //2 более верный способ
+                var products = db.Products.ToList();
+
+                //List<Product> p = new List<Product>();
+
+                var workBook = new XLWorkbook();
+                workBook.Worksheets.Add(products);// как преобр данные??
+
+                workBook.SaveAs(path);
+                
+
+            }
+
+
+            
+
+        }
     }
 }
