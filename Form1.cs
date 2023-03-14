@@ -488,20 +488,45 @@ namespace KitchenDB_EFCore
                 // примеры есть, но несовсем понял... просто втавил таблицу
                 //                                      по первой ячейке
                 sheet.Cell("A1").InsertTable(products);
-
                 workBook.SaveAs(path);
                 */
-
                 //2 более верный способ
+                /*
                 var products = db.Products.ToList();
-
-                //List<Product> p = new List<Product>();
-
+                
                 var workBook = new XLWorkbook();
                 workBook.Worksheets.Add(products);// как преобр данные??
 
                 workBook.SaveAs(path);
+                */
+
+
+                // так всё работает, топорно ,но работает 
+                var products = db.Products.ToList();
+                var workBook = new XLWorkbook();
+
+                var sheet = workBook.Worksheets.Add("Products");
+                var startRow = 1;
+                int startCol = 1;
+
+                foreach(var item in products)
+                {
+                    sheet.Cell(startRow, startCol++).Value = item.Id;
+                    sheet.Cell(startRow, startCol++).Value = item.NameProduct;
+                    sheet.Cell(startRow, startCol++).Value = item.AmountInGramm;
+                    sheet.Cell(startRow, startCol++).Value = item.AmountInPieces;
+                    sheet.Cell(startRow, startCol).Value = item.Note;
+
+                    //startCol = 0; !! из-за этого ошибка :
+                    //Column number must be between 1 and 16384 Arg_ParamName_Name"
+                    startCol = 1;
+                    startRow++;
+
+                }
                 
+                workBook.SaveAs(path);
+
+
 
             }
 
